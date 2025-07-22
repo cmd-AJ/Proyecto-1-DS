@@ -51,8 +51,6 @@ df = pd.concat(dfs, ignore_index=True)
 # Export to CSV
 df.to_csv("Proyecto-1-DS/datos/establecimiento_all.csv", index=False)
 
-print("All department files concatenated and saved to CSV.")
-
 
 
 print(df)
