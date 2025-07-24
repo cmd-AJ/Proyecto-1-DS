@@ -29,26 +29,26 @@ departments = [
 
 dfs = []
 
-for dept in departments:
+for dept in departments: #(Union de todos los colegios de cada departamento que esta clasificado por cada archivo excel)
     filename = f"Proyecto-1-DS/datos/{dept}.xlsx"
     print(f"Reading {filename}")
     
     dftemp = pd.read_excel(filename, skiprows=27)
     
-    # Drop the column if it exists
+    # Eliminamos una columna donde no tenia datos relevantes ya que todos los valores vistos son NAs
     if "Unnamed: 1" in dftemp.columns:
         dftemp = dftemp.drop(columns=["Unnamed: 1"])
     
-    # Drop last 5 rows and last 2 columns (if needed)
+    # No se toma en cuenta las filas o columnas en cuales son solo descripciones ya escritas y columnas que tienen valores NA
     dftemp = dftemp.iloc[:-5, :-2]
 
     dftemp['DEPARTMENT'] = dept
     dfs.append(dftemp)
 
-# Concatenate all DataFrames
+# Concatenatena los DataFrames
 df = pd.concat(dfs, ignore_index=True)
 
-# Export to CSV
+# Exportamos a CSV
 df.to_csv("Proyecto-1-DS/datos/establecimiento_all.csv", index=False)
 
 
